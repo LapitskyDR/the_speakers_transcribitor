@@ -27,17 +27,14 @@ def get_config():
     """
 
     config = configparser.ConfigParser()
-    config.read("config.ini", encoding='utf-8')
+    config.read("tooc_api/config.ini", encoding='utf-8')
 
     conf_data = {
+        'CHANNELS': int(_processing(config['Audio']['channels'])),
+        'SAMPLE_WIDTH': int(_processing(config['Audio']['sample_width'])),
+        'FRAME_RATE': int(_processing(config['Audio']['frame_rate'])),
         "HOST": _processing(config['Server']['host']),
-        "PORT": int(_processing(config['Server']['port'])),
-        "MODEL_REC_NAME": _processing(config['Model']['rec_name']),
-        "MODEL_SPK_NAME": _processing(config['Model']['spk_name']),
-        "MODEL_PATH": _processing(config['Model']['path']),
-        "CHANNELS": int(_processing(config['Audio']['channels'])),
-        "SAMPLE_WIDTH": int(_processing(config['Audio']['sample_width'])),
-        "FRAME_RATE": int(_processing(config['Audio']['frame_rate'])),
+        "PORT": int(_processing(config['Server']['port']))
     }
 
     return conf_data
